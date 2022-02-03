@@ -33,13 +33,13 @@ const Header = () => {
                 aria-label="Search"
               />
               <button id="search-input-submit" className="btn btn-danger" type="submit">
-                <i class="fas fa-search"></i>
+                <i className="fas fa-search"></i>
               </button>
             </form>
             <ul className="navbar-nav mb-2 mb-lg-0">
               <li className="nav-item">
                 <button id="upload-btn" className="btn btn-danger" type="button">
-                  Upload <i class="fas fa-upload"></i>
+                  Upload <i className="fas fa-upload"></i>
                 </button>
               </li>
             </ul>

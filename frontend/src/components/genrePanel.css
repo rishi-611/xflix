@@ -1,18 +1,21 @@
 .panel-btn{
     background-color: transparent;
     color: #fff;
-    border: none;
-    box-shadow: none;
-    outline: none;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
     border-radius: 20px !important; 
 }
 
 .panel-btn:active, .panel-btn:hover, .panel-btn:focus{
-    background-color: white;
-    color: #111;
+    color: #fff;
 }
 
 .active-panel-btn{
     background-color: white;
     color: #111;
+}
+
+.active-panel-btn:active, .active-panel-btn:hover, .active-panel-btn:focus{
+    color: black;
 }
