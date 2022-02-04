@@ -4,10 +4,14 @@ import baseUrl from "../config/ipConfig";
 import Spinner from "./Spinner";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
+import {useSelector} from "react-redux";
+
 
 import "./videos.css";
 
 const Videos = () => {
+  const query = useSelector(state=>state.query);
+
   const [videosData, setVideosData] = useState({
     videos: [],
     loading: false,
@@ -18,11 +22,13 @@ const Videos = () => {
   });
 
   useEffect(() => {
-    //on page load, if data is not loaded already, load it
+    //reload data when query is updated
+    console.log(query);
     if (videosData.loading || videosData.videos.length > 0) return;
 
     updateVideos();
-  }, []);
+  }, [query]);
+
 
   const fetchVideos = async () => {
     try {

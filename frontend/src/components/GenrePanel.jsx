@@ -1,61 +1,81 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 import { availableGenres, availableRatings } from "../config/data";
+import { useDispatch } from "react-redux";
+import { updateFilters } from "../store/actions/queryActions";
 
 import "./genrePanel.css";
 
 const GenrePanel = () => {
-  const [genres, setGenres] = useState(["all genres"]);
-  const [contentRating, setContentRating] = useState("any age group");
+  const dispatch = useDispatch();
+
+  const [genres, setGenres] = useState(["all"]);
+  const [contentRating, setContentRating] = useState("any");
   const [sortBy, setSortBy] = useState("Release Date");
 
-  const toCamelCase  = str =>{
-    let lower = str.toLowerCase().split(" ").map(word=> word[0].toUpperCase() + word.slice(1)).join("");
+  //when any of the filters field change
+  useEffect(() => {
+    dispatch(updateFilters(getQuery()));
+  }, [genres, contentRating, sortBy]);
+
+  const toCamelCase = (str) => {
+    let lower = str
+      .toLowerCase()
+      .split(" ")
+      .map((word) => word[0].toUpperCase() + word.slice(1))
+      .join("");
     return lower;
   };
 
-  const toLowerCamelCase = str =>{
+  const toLowerCamelCase = (str) => {
     let lower = toCamelCase(str);
     return lower[0].toLowerCase() + lower.slice(1);
   };
 
-  const toUpperCamelCase = str =>{
+  const toUpperCamelCase = (str) => {
     let upper = toCamelCase(str);
     return upper[0].toUpperCase() + upper.slice(1);
   };
 
   //returns query to pass along with get videos request
-  const getQueryString = ()=>{
-    let qs = "?";
-    let qsGenres="genres=", qsSortBy="sortBy=", qsRating="contentRating=";
+  const getQuery = () => {
+    let qsGenres = "",
+      qsSortBy = "",
+      qsRating = "";
 
     //sortby
-    qsSortBy+= toLowerCamelCase(sortBy);
-    
+    qsSortBy += toLowerCamelCase(sortBy);
+
     //genres
-    if(genres.includes("all genres")){
+    if (genres.includes("all")) {
       qsGenres += "All";
-    }else{
-      const filteredGenres = genres.filter(genre=> genre!== "all genres");
-      filteredGenres.forEach(filteredGenre=> qsGenres+= toUpperCamelCase(filteredGenre) + ",");
+    } else {
+      const filteredGenres = genres.filter((genre) => genre !== "all");
+      filteredGenres.forEach(
+        (filteredGenre) => (qsGenres += toUpperCamelCase(filteredGenre) + ",")
+      );
       //remove last comma
-      if(qsGenres.length > "genres=".length) qsGenres = qsGenres.slice(0, qsGenres.length-1);
+      if (qsGenres.length > 0)
+        qsGenres = qsGenres.slice(0, qsGenres.length - 1);
     }
 
     //rating
-    if(contentRating === "any age group"){
+    if (contentRating === "any") {
       qsRating = ""; //no need to add any filters
-    }else{
-      qsRating+= encodeURIComponent(contentRating);
+    } else {
+      qsRating += encodeURIComponent(contentRating);
     }
 
-
-    console.log(qsSortBy, qsGenres, qsRating)
-  }
-  getQueryString();
+    return {
+      genres: qsGenres,
+      contentRating: qsRating,
+      sortBy: qsSortBy,
+    };
+  };
 
   const updateGenre = (e) => {
     const genre = e.target.innerText.toLowerCase();
+
     const isAlreadyActive =
       e.target.getAttribute("data-genre-toggle") === "on" ? true : false;
 
@@ -77,7 +97,6 @@ const GenrePanel = () => {
 
   const updateSortBy = (e) => setSortBy(e.target.value);
 
-  
   //checks if the genre is present in genre statelist
   const isActiveGenre = (genre) => {
     return genres.indexOf(genre.toLowerCase()) !== -1;
@@ -120,7 +139,6 @@ const GenrePanel = () => {
     </>
   );
 
-
   return (
     <div className="bg-dark-custom text-light py-3">
       <Container fluid="lg">
@@ -131,12 +149,12 @@ const GenrePanel = () => {
                 <button
                   type="button"
                   className={`btn panel-btn genre-btn ${
-                    isActiveGenre("all genres") ? "active-panel-btn" : ""
+                    isActiveGenre("all") ? "active-panel-btn" : ""
                   }`}
                   data-genre-toggle="on"
                   onClick={updateGenre}
                 >
-                  All Genres
+                  All
                 </button>
               </div>
               {renderGenreBtns()}
@@ -169,17 +187,17 @@ const GenrePanel = () => {
         <Row className="mt-4">
           <div className="col-6 offset-3">
             <Row>
-              <div className="col-4">
+              <div className="col-2 offset-2">
                 <button
                   type="button"
                   className={`btn panel-btn content-rating-btn ${
-                    "any age group".toLowerCase() === contentRating
+                    "any".toLowerCase() === contentRating
                       ? "active-panel-btn"
                       : ""
                   }`}
                   onClick={updateRating}
                 >
-                  Any age group
+                  Any
                 </button>
               </div>
               {renderRatingBtns()}
