@@ -4,13 +4,12 @@ import baseUrl from "../config/ipConfig";
 import Spinner from "./Spinner";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
-import {useSelector} from "react-redux";
-
+import { useSelector } from "react-redux";
 
 import "./videos.css";
 
 const Videos = () => {
-  const query = useSelector(state=>state.query);
+  const query = useSelector((state) => state.query);
 
   const [videosData, setVideosData] = useState({
     videos: [],
@@ -23,16 +22,31 @@ const Videos = () => {
 
   useEffect(() => {
     //reload data when query is updated
-    console.log(query);
-    if (videosData.loading || videosData.videos.length > 0) return;
 
-    updateVideos();
+    //if some data is already loading, then return
+    if (videosData.loading) return;
+
+    updateVideos(generateQuery(query)); //provide the query for fetch
   }, [query]);
 
+  //converts object key val pairs to query
+  const generateQuery = (query) => {
+    let qs = "?";
 
-  const fetchVideos = async () => {
+    for (const key in query) {
+      if (query[key].length) {
+        qs += `${key}=${query[key]}&`;
+      }
+    }
+
+    //remove last end
+    if(qs[qs.length-1] === "&") qs = qs.slice(0, qs.length-1);
+    return qs;
+  };
+
+  const fetchVideos = async (queryString) => {
     try {
-      const res = await fetch(baseUrl + "/v1/videos");
+      const res = await fetch(baseUrl + "/v1/videos" + queryString);
       const data = await res.json();
       return { error: null, videos: data.videos };
     } catch (error) {
@@ -40,7 +54,7 @@ const Videos = () => {
     }
   };
 
-  const updateVideos = async () => {
+  const updateVideos = async (queryString) => {
     //set loading to true
     setVideosData((videosData) => ({
       ...videosData,
@@ -48,7 +62,7 @@ const Videos = () => {
     }));
 
     //fetch data
-    const { error, videos } = await fetchVideos();
+    const { error, videos } = await fetchVideos(queryString);
 
     //update state with data
     if (error) {
