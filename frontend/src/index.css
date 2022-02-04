@@ -17,6 +17,9 @@ code {
   background-color: #181818 !important;
 }
 
-a{
+a, a:hover, a:active, a:visited, a:focus{
   text-decoration: none;
+  color: inherit;
 }
+
+

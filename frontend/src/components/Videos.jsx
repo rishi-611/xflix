@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import baseUrl from "../config/ipConfig";
 import Spinner from "./Spinner";
-import {format } from "timeago.js";
-import {Link} from "react-router-dom"
+import { format } from "timeago.js";
+import { Link } from "react-router-dom";
 
 import "./videos.css";
 
@@ -17,7 +17,12 @@ const Videos = () => {
     },
   });
 
-  //   const {videos, loading, error} = videosData;
+  useEffect(() => {
+    //on page load, if data is not loaded already, load it
+    if (videosData.loading || videosData.videos.length > 0) return;
+
+    updateVideos();
+  }, []);
 
   const fetchVideos = async () => {
     try {
@@ -62,18 +67,10 @@ const Videos = () => {
       });
     }
   };
-
-  useEffect(() => {
-    //on page load, if data is not loaded already, load it
-    if (videosData.loading || videosData.videos.length > 0) return;
-
-    updateVideos();
-  }, []);
-
   const renderVideos = () =>
     videosData.videos.map((video) => (
       <Col md="6" lg="3" key={video._id} className="mb-3   ">
-        <Link to={`/videos/${video._id}`} className="video-tile-link">
+        <Link to={`/video/${video._id}`} className="video-tile-link">
           <div className="card bg-dark text-light" className="video-tile">
             <img
               className="card-img-top"

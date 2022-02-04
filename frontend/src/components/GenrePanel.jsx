@@ -9,6 +9,51 @@ const GenrePanel = () => {
   const [contentRating, setContentRating] = useState("any age group");
   const [sortBy, setSortBy] = useState("Release Date");
 
+  const toCamelCase  = str =>{
+    let lower = str.toLowerCase().split(" ").map(word=> word[0].toUpperCase() + word.slice(1)).join("");
+    return lower;
+  };
+
+  const toLowerCamelCase = str =>{
+    let lower = toCamelCase(str);
+    return lower[0].toLowerCase() + lower.slice(1);
+  };
+
+  const toUpperCamelCase = str =>{
+    let upper = toCamelCase(str);
+    return upper[0].toUpperCase() + upper.slice(1);
+  };
+
+  //returns query to pass along with get videos request
+  const getQueryString = ()=>{
+    let qs = "?";
+    let qsGenres="genres=", qsSortBy="sortBy=", qsRating="contentRating=";
+
+    //sortby
+    qsSortBy+= toLowerCamelCase(sortBy);
+    
+    //genres
+    if(genres.includes("all genres")){
+      qsGenres += "All";
+    }else{
+      const filteredGenres = genres.filter(genre=> genre!== "all genres");
+      filteredGenres.forEach(filteredGenre=> qsGenres+= toUpperCamelCase(filteredGenre) + ",");
+      //remove last comma
+      if(qsGenres.length > "genres=".length) qsGenres = qsGenres.slice(0, qsGenres.length-1);
+    }
+
+    //rating
+    if(contentRating === "any age group"){
+      qsRating = ""; //no need to add any filters
+    }else{
+      qsRating+= encodeURIComponent(contentRating);
+    }
+
+
+    console.log(qsSortBy, qsGenres, qsRating)
+  }
+  getQueryString();
+
   const updateGenre = (e) => {
     const genre = e.target.innerText.toLowerCase();
     const isAlreadyActive =
@@ -78,7 +123,7 @@ const GenrePanel = () => {
 
   return (
     <div className="bg-dark-custom text-light py-3">
-      <Container>
+      <Container fluid="lg">
         <Row>
           <div className="col-8 offset-2">
             <Row>
