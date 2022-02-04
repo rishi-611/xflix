@@ -7,6 +7,7 @@ import "./genrePanel.css";
 const GenrePanel = () => {
   const [genres, setGenres] = useState(["all genres"]);
   const [contentRating, setContentRating] = useState("any age group");
+  const [sortBy, setSortBy] = useState("Release Date");
 
   const updateGenre = (e) => {
     const genre = e.target.innerText.toLowerCase();
@@ -28,6 +29,14 @@ const GenrePanel = () => {
 
   const updateRating = (e) =>
     setContentRating(e.target.innerText.toLowerCase());
+
+  const updateSortBy = (e) => setSortBy(e.target.value);
+
+  
+  //checks if the genre is present in genre statelist
+  const isActiveGenre = (genre) => {
+    return genres.indexOf(genre.toLowerCase()) !== -1;
+  };
 
   const renderGenreBtns = () => (
     <>
@@ -66,13 +75,9 @@ const GenrePanel = () => {
     </>
   );
 
-  //checks if the genre is present in genre statelist
-  const isActiveGenre = (genre) => {
-    return genres.indexOf(genre.toLowerCase()) !== -1;
-  };
 
   return (
-    <div className="bg-dark text-light py-3">
+    <div className="bg-dark-custom text-light py-3">
       <Container>
         <Row>
           <div className="col-8 offset-2">
@@ -92,7 +97,29 @@ const GenrePanel = () => {
               {renderGenreBtns()}
             </Row>
           </div>
-          <div className="col-2"></div>
+          <div className="col-2">
+            <select
+              className="form-select sortBy-select sort-select"
+              aria-label="Default select example"
+              defaultValue="release-date-option"
+              onChange={updateSortBy}
+            >
+              <option
+                id="release-date-option"
+                className="my-2"
+                value="Release Date"
+              >
+                Release Date
+              </option>
+              <option
+                id="view-count-option"
+                className="my-2"
+                value="View Count"
+              >
+                View Count
+              </option>
+            </select>
+          </div>
         </Row>
         <Row className="mt-4">
           <div className="col-6 offset-3">

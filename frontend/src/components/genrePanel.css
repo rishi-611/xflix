@@ -19,3 +19,13 @@
 .active-panel-btn:active, .active-panel-btn:hover, .active-panel-btn:focus{
     color: black;
 }
+
+.sortBy-select{
+    border-radius: 20px !important;
+    max-width: 150px;
+}
+
+.sortBy-select option{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
