@@ -46,6 +46,7 @@ const Videos = () => {
 
   const fetchVideos = async (queryString) => {
     try {
+      console.log(queryString)
       const res = await fetch(baseUrl + "/v1/videos" + queryString);
       const data = await res.json();
       return { error: null, videos: data.videos };

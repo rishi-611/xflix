@@ -203,6 +203,7 @@ const GenrePanel = () => {
               {renderRatingBtns()}
             </Row>
           </div>
+          
         </Row>
       </Container>
     </div>

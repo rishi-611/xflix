@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateSearch } from "../store/actions/queryActions";
+import UploadModal from "./UploadModal";
 
 const HeaderForm = () => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
+  const [modalShow, setModalShow] = useState(false);
 
   const handleSearchChange = (e) => setSearch(e.target.value);
 
@@ -47,9 +49,15 @@ const HeaderForm = () => {
         </form>
         <ul className="navbar-nav mb-2 mb-lg-0">
           <li className="nav-item">
-            <button id="upload-btn" className="btn btn-danger" type="button">
+            <button
+              id="upload-btn"
+              className="btn btn-danger"
+              type="button"
+              onClick={() => setModalShow(true)}
+            >
               Upload <i className="fas fa-upload"></i>
             </button>
+            <UploadModal show={modalShow} onHide={() => setModalShow(false)} />
           </li>
         </ul>
       </div>
