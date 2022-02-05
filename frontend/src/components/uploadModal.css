@@ -76,3 +76,12 @@
 .react-datepicker__triangle{
     display: none !important;
 }
+
+/* .form-validate{
+  font-size: 0.85rem;
+  font-weight: light;
+} */
+
+.form-validate span{
+  text-decoration: underline;
+}
