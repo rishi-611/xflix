@@ -13,3 +13,8 @@
 .votes-btn{
     border-radius: 20px;
 }
+
+.video-inner-box{
+    border-radius: 0.5rem;
+    overflow: hidden;
+}

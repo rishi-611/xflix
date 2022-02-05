@@ -15,9 +15,12 @@ const VideoPlayer = ({ videoId }) => {
 
   const { video } = videoDetails;
 
-  //fetch the video on page load
   useEffect(() => {
+    //fetch the video on page load
     updateVideo();
+
+    //on a visit to this video, increment its view count
+    incrementViewCount(videoId);
   }, []);
 
   //fetches video
@@ -36,6 +39,7 @@ const VideoPlayer = ({ videoId }) => {
       }
 
       const data = await res.json();
+
       return {
         video: data,
         error: null,
@@ -48,6 +52,19 @@ const VideoPlayer = ({ videoId }) => {
           message: "could not fetch video",
         },
       };
+    }
+  };
+
+  //increments video view  count
+  const incrementViewCount = async (videoId) => {
+    try {
+      const url = `${baseUrl}/v1/videos/${videoId}/views`;
+      const options = {
+        method: "PATCH",
+      };
+      await fetch(url, options); //response will be blank
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -77,7 +94,37 @@ const VideoPlayer = ({ videoId }) => {
     }
   };
 
-  console.log(videoDetails);
+  //@params type=> upVote / downVote
+  const updateVotes= async(type)=>{
+    try {
+      const url = `${baseUrl}/v1/videos/${videoId}/votes`;
+      const options = {
+        method: "PATCH",
+        options: {
+          vote: type,
+          change: "increase"
+        }
+      };
+      await fetch(url, options); //response will be blank
+
+      //on successful response, increment local vote count
+      setVideoDetails(videoDetails=>({
+        ...videoDetails,
+        video: {
+          ...videoDetails.video,
+          votes: {
+            ...videoDetails.video.votes,
+            [`${type}s`]: videoDetails.video.votes[`${type}s`]+1
+          }
+        }
+      }))
+    } catch (error) {
+      console.log(error);
+    }
+
+  
+  }
+
 
   return (
     <div className="mb-3 video-outer-container">
@@ -92,7 +139,7 @@ const VideoPlayer = ({ videoId }) => {
       {video && (
         <div className="container-fluid videoPlayer-box p-0">
           {/* video */}
-          <div className="ratio ratio-16x9">
+          <div className="ratio ratio-16x9 video-inner-box">
             <iframe
               src={`https://www.${video.videoLink}`}
               title={video.title}
@@ -124,7 +171,7 @@ const VideoPlayer = ({ videoId }) => {
               <div className="col-lg-3 d-flex align-items-center justify-content-end p-0 mt-2 mt-lg-0">
                 <div className="row container-fluid p-0">
                   <div className="col-3 col-lg-6 p-0">
-                    <button className="btn btn-primary votes-btn">
+                    <button className="btn btn-primary votes-btn" onClick={()=> updateVotes("upVote")}>
                       <i
                         className="fas fa-thumbs-up"
                         style={{ marginRight: "5px" }}
@@ -133,7 +180,7 @@ const VideoPlayer = ({ videoId }) => {
                     </button>
                   </div>
                   <div className="col-3 col-lg-6 p-0">
-                    <button className="btn btn-dark votes-btn">
+                    <button className="btn btn-dark votes-btn" onClick={()=> updateVotes("downVote")}>
                       <i
                         className="fas fa-thumbs-down"
                         style={{ marginRight: "5px" }}
@@ -144,7 +191,9 @@ const VideoPlayer = ({ videoId }) => {
                 </div>
               </div>
             </div>
-            <div className="views-box my-1">{video.viewCount} views <i className="fas fa-eye"></i></div>
+            <div className="views-box my-1">
+              {video.viewCount} views <i className="fas fa-eye"></i>
+            </div>
           </div>
         </div>
       )}

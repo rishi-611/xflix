@@ -143,7 +143,7 @@ const GenrePanel = () => {
     <div className="bg-dark-custom text-light py-3">
       <Container fluid="lg">
         <Row>
-          <div className="col-8 offset-2">
+          <div className="col-12 col-lg-8 offset-lg-2">
             <Row>
               <div className="col-2 offset-1">
                 <button
@@ -160,7 +160,7 @@ const GenrePanel = () => {
               {renderGenreBtns()}
             </Row>
           </div>
-          <div className="col-2">
+          <div className="col-12 col-lg-2 d-flex justify-content-center mt-2 mt-lg-0">
             <select
               className="form-select sortBy-select sort-select"
               aria-label="Default select example"
@@ -185,9 +185,9 @@ const GenrePanel = () => {
           </div>
         </Row>
         <Row className="mt-4">
-          <div className="col-6 offset-3">
+          <div className="col-10 offset-1 col-md-6 offset-md-3">
             <Row>
-              <div className="col-2 offset-2">
+              <div className="col-2 offset-1">
                 <button
                   type="button"
                   className={`btn panel-btn content-rating-btn ${
@@ -203,7 +203,6 @@ const GenrePanel = () => {
               {renderRatingBtns()}
             </Row>
           </div>
-          
         </Row>
       </Container>
     </div>
