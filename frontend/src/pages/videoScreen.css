@@ -1,0 +1,20 @@
+.videoPlayer-box{
+    max-width: 950px;
+    border-bottom: 1px solid #eee;
+
+}
+
+.video-details{
+    color: #eee;
+    font-weight: light;
+
+}
+
+.votes-btn{
+    border-radius: 20px;
+}
+
+.video-inner-box{
+    border-radius: 0.5rem;
+    overflow: hidden;
+}

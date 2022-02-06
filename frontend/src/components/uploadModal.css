@@ -1,0 +1,87 @@
+.modal-content,
+.modal-input,
+.modal-genre-select,
+.modal-genre-options,
+.modal-rating-select,
+.modal-rating-options,
+.modal-datepicker {
+  color: white !important;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.1)
+    ),
+    #121212 !important;
+
+  box-shadow: none !important;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-footer {
+  border-top: none;
+}
+
+.modal-content .btn-close {
+  color: white;
+}
+
+.modal-label {
+  color: #ddd;
+  font-size: 0.8rem;
+  font-weight: light;
+}
+
+.modal-input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #ddd;
+  opacity: 1; /* Firefox */
+}
+
+.modal-input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #ddd;
+}
+
+.modal-input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #ddd;
+}
+
+.modal-cancel {
+  color: #ddd !important;
+  text-decoration: none;
+}
+
+.modal-datepicker {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  border: 1px solid #ced4da;
+  appearance: none;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.modal-datepicker::placeholder {
+  color: #ddd;
+  opacity: 1; /* Firefox */
+}
+
+.react-datepicker__triangle{
+    display: none !important;
+}
+
+/* .form-validate{
+  font-size: 0.85rem;
+  font-weight: light;
+} */
+
+.form-validate span{
+  text-decoration: underline;
+}
