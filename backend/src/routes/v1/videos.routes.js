@@ -1,26 +1,39 @@
 const express = require("express");
 const validate = require("../../middlewares/validate");
-const videoController = require('../../controllers/video.controller');
-const videoValidation = require('../../validations/video.validation');
+const videoController = require("../../controllers/videos.controller");
+const videoValidation = require("../../validations/videos.validation");
 
 const router = express.Router();
 
-// // Return all available videos according to the query parameters and sortBy query
-router.get('/', validate(videoValidation.getVideos), videoController.getVideos);
+router.get(
+  "/",
+  validate(videoValidation.getVideos),
+  videoController.getAllVideos
+);
 
-// // Create a new video object with all required fields
-// router.post('/', validate(videoValidation.videoUpload), videoController.postVideo);
+router.get(
+  "/:videoId",
+  validate(videoValidation.getVideoById),
+  videoController.getVideoById
+);
 
-// // Update upVote or downVote value by 1(increase or decrease) for a video
-// router.patch('/:videoId/votes', validate(videoValidation.videoById), videoController.updateVotes);
+router.post(
+  "/",
+  validate(videoValidation.postVideo),
+  videoController.postVideo
+);
 
-// // Increase the viewCount value of a video by 1
-// router.patch('/:videoId/views', validate(videoValidation.videoById), videoController.incrementViews);
+router.patch(
+  "/:videoId/views",
+  validate(videoValidation.getVideoById),
+  videoController.incrementViews
+);
 
-// // Get the video object for a specific video
-// router.get('/:videoId', validate(videoValidation.videoById), videoController.getVideoById);
-
-router.get("/", (req,res)=>res.json("hello"));
-
+router.patch(
+  "/:videoId/votes",
+  validate(videoValidation.getVideoById),
+  validate(videoValidation.updateVotes),
+  videoController.updateVotes
+);
 
 module.exports = router;

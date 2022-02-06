@@ -10,17 +10,18 @@ const objectId = (value, helpers) => {
 
 //genres can be out of these values only
 const genres = (value, helpers) => {
-  if (value == null) return true;
+  if (!value) return true;
 
   //all values seperated by commas must in genres string must be present in config genre types
-  value.split(",").forEach((genre) => {
-    if (genreTypes.indexOf(genre.trim()) === -1)
-      return helpers.message(
-        `genres must be one of the following: ${genreTypes}`
-      );
-  });
+  const isValid = value
+    .split(",")
+    .every((inputGenre) => config.genre_types.includes(inputGenre));
 
-  return value;
+  if(isValid){
+    return value;
+  }else{
+    return helpers.message("Genre must be one of " + config.genre_types.filter(type=>type!=="All"));
+  }
 };
 
 const videoLink = (value, helpers) => {
