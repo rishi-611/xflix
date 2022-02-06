@@ -57,7 +57,7 @@ const ModalForm = (props) => {
     e.preventDefault();
 
     //validate video link
-    const isLinkValid = youtubeURLRegex.test(formData.videoLink); //validate video link
+    const isLinkValid = youtubeURLRegex.test(formData.videoLink.replace("https://www.", "")); //validate video link
     if (!isLinkValid) {
       setIsLinkValid(false);
       return;
@@ -73,7 +73,8 @@ const ModalForm = (props) => {
     
     const formattedFormData = {
         ...formData,
-        releaseDate: releaseDateFormatted
+        releaseDate: releaseDateFormatted,
+        videoLink: formData.videoLink.replace("https://www.", "")
     }
 
     //trigger post request
@@ -158,8 +159,8 @@ const ModalForm = (props) => {
               {genre}
             </option>
           ))}
-          <option className="modal-genre-options" value="any">
-            None
+          <option className="modal-genre-options" value="All">
+            All
           </option>
         </Form.Select>
         <Form.Label className="ps-2  modal-label">
@@ -188,7 +189,7 @@ const ModalForm = (props) => {
             </option>
           ))}
           <option className="modal-rating-options" value="any">
-            Any
+            Anyone
           </option>
         </Form.Select>
         <Form.Label className="ps-2  modal-label">
@@ -206,6 +207,7 @@ const ModalForm = (props) => {
           className="modal-datepicker"
           id="upload-btn-release-date"
           required
+          autoComplete="false"
         />
         <Form.Label className="ps-2  modal-label">
           This will be used to sort videos

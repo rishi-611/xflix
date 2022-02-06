@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 import { availableGenres, availableRatings } from "../config/data";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateFilters } from "../store/actions/queryActions";
 
 import "./genrePanel.css";
 
 const GenrePanel = () => {
   const dispatch = useDispatch();
+  const query = useSelector((state) => state.query);
 
-  const [genres, setGenres] = useState(["all"]);
-  const [contentRating, setContentRating] = useState("any");
+  const [genres, setGenres] = useState(
+    !query.genres.length
+      ? ["all"] //if nothing else
+      : query.genres.split(",").map((genre) => genre.toLowerCase()) //is state already has a query
+  );
+  const [contentRating, setContentRating] = useState(
+    !query.contentRating.length ? "any" : decodeURIComponent(query.contentRating).toLowerCase()
+  );
   const [sortBy, setSortBy] = useState("Release Date");
 
   //when any of the filters field change

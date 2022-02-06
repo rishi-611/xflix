@@ -1,7 +1,7 @@
 import * as types from "../constants";
 
 const initialState = {
-    search: "",
+    title: "",
     genres: "",
     contentRating: "",
     sortBy: ""
@@ -21,7 +21,7 @@ const queryReducer = (state=initialState, action)=>{
         case types.UPDATE_QUERY_SEARCH:
             return {
                 ...state,
-                search: payload.search
+                title: payload.search
             }
 
         default:

@@ -8,10 +8,9 @@ let server;
 // connect to database
 mongoose
   .connect(config.mongoose.url, config.mongoose.options)
-  .then(() => console.log(colors.blue.bold(`database running at  ${config.mongoose.url}`)))
+  .then(() => console.log(colors.blue.bold(`connected to database`)))
   .catch((err) => {
     console.log(colors.red.bold("could not connect to database"))
-    console.log(colors.red(config.mongoose.url))
     console.log(err);
   });
 

@@ -23,11 +23,11 @@ const getAllVideos = async (title, genres, contentRating, sortBy) => {
     // if we have a valid rating
     if(indexOfRating !== -1){
       //according to api docs
-        // let ratingsSubset = ratings.splice(0, indexOfRating + 1);
-        // filters.contentRating = {$in: ratingsSubset};
+        let ratingsSubset = ratings.splice(0, indexOfRating + 1);
+        filters.contentRating = {$in: ratingsSubset};
 
         //to pass tests
-        filters.contentRating = {$in: [contentRating]};
+        // filters.contentRating = {$in: [contentRating]};
     }
 
 }
@@ -67,7 +67,7 @@ const createVideo = async (body) => {
 const updateVideoUpVotes = async (videoId, changeBy) => {
   const video = await getVideoById(videoId);
   video.votes = {
-    upVotes: video.votes.upVotes + changeBy,
+    upVotes: Number(video.votes.upVotes) + Number(changeBy),
     downVotes: video.votes.downVotes,
   };
   await video.save();
@@ -77,7 +77,7 @@ const updateVideoDownVotes = async (videoId, changeBy) => {
   const video = await getVideoById(videoId);
   video.votes = {
     upVotes: video.votes.upVotes,
-    downVotes: video.votes.downVotes + changeBy,
+    downVotes: Number(video.votes.downVotes) + Number(changeBy),
   };
   await video.save();
 };

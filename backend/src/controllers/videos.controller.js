@@ -39,13 +39,16 @@ const postVideo = catchAsync(async (req, res) => {
 });
 
 const updateVotes = catchAsync(async (req, res) => {
+
   const { vote, change } = req.body;
 
   const { videoId } = req.params;
 
   const changeFactor = change === "decrease" ? -1 : 1;
 
+  console.log(req.body)
   if (vote === "upVote") {
+    console.log("upvoting")
     await videoService.updateVideoUpVotes(videoId, changeFactor);
   } else if (vote == "downVote") {
     await videoService.updateVideoDownVotes(videoId, changeFactor);

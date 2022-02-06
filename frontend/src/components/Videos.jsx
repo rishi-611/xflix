@@ -40,13 +40,15 @@ const Videos = () => {
     }
 
     //remove last end
-    if(qs[qs.length-1] === "&") qs = qs.slice(0, qs.length-1);
+    if (qs[qs.length - 1] === "&") qs = qs.slice(0, qs.length - 1);
+
+    if (qs.length === 1) return ""; //if no query generated
+
     return qs;
   };
 
   const fetchVideos = async (queryString) => {
     try {
-      console.log(queryString)
       const res = await fetch(baseUrl + "/v1/videos" + queryString);
       const data = await res.json();
       return { error: null, videos: data.videos };
@@ -107,10 +109,37 @@ const Videos = () => {
       </Col>
     ));
 
+  if (videosData.loading)
+    return (
+      <Container className="pt-4 bg-dark text-light">
+        <Spinner />
+      </Container>
+    );
+
+  if (videosData.error.status) {
+    return (
+      <Container className="pt-4 bg-dark text-light">
+        <div class="alert alert-danger" role="alert">
+          {videosData.error.message}
+        </div>
+      </Container>
+    );
+  }
+
+  if(!videosData.videos.length){
+    return (
+      <Container className="pt-4 bg-dark text-light">
+        <div class="alert alert-danger" role="alert">
+          Oops! Could not find any matching videos
+        </div>
+      </Container>
+    );
+  }
+
   return (
     <div className="pt-4 bg-dark text-light">
       <Container>
-        {videosData.loading ? <Spinner /> : <Row>{renderVideos()}</Row>}
+        <Row>{renderVideos()}</Row>
       </Container>
     </div>
   );

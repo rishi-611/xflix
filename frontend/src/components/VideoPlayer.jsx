@@ -39,7 +39,7 @@ const VideoPlayer = ({ videoId }) => {
       }
 
       const data = await res.json();
-
+      console.log(data)
       return {
         video: data,
         error: null,
@@ -100,10 +100,13 @@ const VideoPlayer = ({ videoId }) => {
       const url = `${baseUrl}/v1/videos/${videoId}/votes`;
       const options = {
         method: "PATCH",
-        options: {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
           vote: type,
           change: "increase"
-        }
+        })
       };
       await fetch(url, options); //response will be blank
 
@@ -114,7 +117,7 @@ const VideoPlayer = ({ videoId }) => {
           ...videoDetails.video,
           votes: {
             ...videoDetails.video.votes,
-            [`${type}s`]: videoDetails.video.votes[`${type}s`]+1
+            [`${type}s`]: Number(videoDetails.video.votes[`${type}s`])+1
           }
         }
       }))
