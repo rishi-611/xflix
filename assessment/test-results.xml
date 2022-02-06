@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="18.4820" tests="11" failures="0">
-  <testsuite name="Root Suite" timestamp="2022-02-05T09:26:53" tests="0" file="specs/homePageSpec.js" time="0.0000" failures="0">
+<testsuites name="Mocha Tests" time="18.3200" tests="11" failures="0">
+  <testsuite name="Root Suite" timestamp="2022-02-05T09:37:54" tests="0" file="specs/homePageSpec.js" time="0.0000" failures="0">
   </testsuite>
-  <testsuite name="XFlix" timestamp="2022-02-05T09:26:53" tests="11" time="18.4130" failures="0">
-    <testcase name="XFlix should display 5 genre buttons on a row" time="4.6710" classname="should display 5 genre buttons on a row">
+  <testsuite name="XFlix" timestamp="2022-02-05T09:37:54" tests="11" time="18.2900" failures="0">
+    <testcase name="XFlix should display 5 genre buttons on a row" time="4.0930" classname="should display 5 genre buttons on a row">
     </testcase>
-    <testcase name="XFlix should display 5 content rating buttons on a row" time="0.9250" classname="should display 5 content rating buttons on a row">
+    <testcase name="XFlix should display 5 content rating buttons on a row" time="0.9540" classname="should display 5 content rating buttons on a row">
     </testcase>
-    <testcase name="XFlix should not have same parent for genre and content rating buttons" time="1.0440" classname="should not have same parent for genre and content rating buttons">
+    <testcase name="XFlix should not have same parent for genre and content rating buttons" time="0.8590" classname="should not have same parent for genre and content rating buttons">
     </testcase>
-    <testcase name="XFlix should not have &quot;View Count&quot; option selected in sort by dropdown on page load" time="0.6030" classname="should not have &quot;View Count&quot; option selected in sort by dropdown on page load">
+    <testcase name="XFlix should not have &quot;View Count&quot; option selected in sort by dropdown on page load" time="0.6980" classname="should not have &quot;View Count&quot; option selected in sort by dropdown on page load">
     </testcase>
-    <testcase name="XFlix should have &quot;Release Date&quot; option selected in sort by dropdown on page load" time="0.6350" classname="should have &quot;Release Date&quot; option selected in sort by dropdown on page load">
+    <testcase name="XFlix should have &quot;Release Date&quot; option selected in sort by dropdown on page load" time="0.5430" classname="should have &quot;Release Date&quot; option selected in sort by dropdown on page load">
     </testcase>
-    <testcase name="XFlix should have &quot;View Count&quot; option selectable after clicking on the sort by dropdown" time="0.6850" classname="should have &quot;View Count&quot; option selectable after clicking on the sort by dropdown">
+    <testcase name="XFlix should have &quot;View Count&quot; option selectable after clicking on the sort by dropdown" time="0.9680" classname="should have &quot;View Count&quot; option selectable after clicking on the sort by dropdown">
     </testcase>
-    <testcase name="XFlix should have &quot;Upload&quot; button on landing page on load" time="0.6120" classname="should have &quot;Upload&quot; button on landing page on load">
+    <testcase name="XFlix should have &quot;Upload&quot; button on landing page on load" time="0.5540" classname="should have &quot;Upload&quot; button on landing page on load">
     </testcase>
-    <testcase name="XFlix should open video modal with &quot;Submit&quot; and &quot;Cancel&quot; buttons, on clicking &quot;Upload&quot; button" time="1.2230" classname="should open video modal with &quot;Submit&quot; and &quot;Cancel&quot; buttons, on clicking &quot;Upload&quot; button">
+    <testcase name="XFlix should open video modal with &quot;Submit&quot; and &quot;Cancel&quot; buttons, on clicking &quot;Upload&quot; button" time="1.1080" classname="should open video modal with &quot;Submit&quot; and &quot;Cancel&quot; buttons, on clicking &quot;Upload&quot; button">
     </testcase>
-    <testcase name="XFlix should open video modal on clicking &quot;Upload&quot; button and close it on clicking &quot;Cancel&quot; button in the modal" time="1.7500" classname="should open video modal on clicking &quot;Upload&quot; button and close it on clicking &quot;Cancel&quot; button in the modal">
+    <testcase name="XFlix should open video modal on clicking &quot;Upload&quot; button and close it on clicking &quot;Cancel&quot; button in the modal" time="1.8740" classname="should open video modal on clicking &quot;Upload&quot; button and close it on clicking &quot;Cancel&quot; button in the modal">
     </testcase>
-    <testcase name="XFlix should have at least 10 links (with class &quot;video-tile-link&quot;) to different videos on page load." time="2.6990" classname="should have at least 10 links (with class &quot;video-tile-link&quot;) to different videos on page load.">
+    <testcase name="XFlix should have at least 10 links (with class &quot;video-tile-link&quot;) to different videos on page load." time="2.8750" classname="should have at least 10 links (with class &quot;video-tile-link&quot;) to different videos on page load.">
     </testcase>
-    <testcase name="XFlix should display the video page on clicking the first video tile (with class &quot;video-tile&quot;) which has a parent element with class &quot;video-tile-link&quot;" time="2.7720" classname="should display the video page on clicking the first video tile (with class &quot;video-tile&quot;) which has a parent element with class &quot;video-tile-link&quot;">
+    <testcase name="XFlix should display the video page on clicking the first video tile (with class &quot;video-tile&quot;) which has a parent element with class &quot;video-tile-link&quot;" time="2.7330" classname="should display the video page on clicking the first video tile (with class &quot;video-tile&quot;) which has a parent element with class &quot;video-tile-link&quot;">
     </testcase>
   </testsuite>
 </testsuites>
